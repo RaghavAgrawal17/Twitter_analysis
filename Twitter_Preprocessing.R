@@ -24,4 +24,16 @@ df$statusSource <- lapply(df$statusSource, plain_text)
 
 df <- select(df,1,3:13)
 
+df$text <- gsub("<U(.*)>","",df$text)
+df$text <- gsub("^RT ","",df$text)
+df$text <- tolower(df$text)
+df$text <- gsub("https.*","",df$text)
+df$text <- gsub("#","",df$text)
+df$text <- gsub("@(\\w+)","",df$text)
+df$text <- gsub('“',"",df$text)
+df$text <- gsub('”',"",df$text)
+df$text <- gsub("—"," ",df$text)
+
+df$text <- gsub('[[:punct:]|[:digit:] ]+',' ',df$text)
+
 summary(df)
